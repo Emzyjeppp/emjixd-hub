@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeppp - X Bio</title>
+    
+    <!-- Fonts: Outfit for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            /* Tema Gelap ala Portofolio Jeppp */
+            --bg-color: #0f172a;       /* Slate 900 */
+            --card-bg: #1e293b;        /* Slate 800 */
+            --accent: #6366f1;         /* Indigo 500 */
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --text-main: #f8fafc;      /* Slate 50 */
+            --text-muted: #94a3b8;     /* Slate 400 */
+            --border-color: #334155;   /* Slate 700 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px -5px var(--accent-glow);
+        }
+
+        /* --- HEADER CARD --- */
+        .header-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .status-box {
+            flex-grow: 1;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-style: italic;
+        }
+
+        /* --- ABOUT CARD --- */
+        .about-card {
+            display: flex;
+            gap: 20px;
+        }
+
+        .profile-section {
+            width: 170px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            padding: 4px;
+        }
+
+        .name-badge {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .name-badge span {
+            color: var(--accent);
+        }
+
+        .info-section {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .info-section h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-section h2 i {
+            color: var(--accent);
+        }
+
+        .info-row {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .info-row strong {
+            color: var(--text-main);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: rgba(248, 250, 252, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 6px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- RULES CARD --- */
+        .rules-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rules-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent), #38bdf8);
+        }
+
+        .rules-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 8px;
+        }
+
+        .rules-block h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .rules-block h3 i {
+            color: var(--accent);
+        }
+
+        .rules-block p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        /* --- SOCIAL CARD --- */
+        .social-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            padding: 16px;
+        }
+
+        .social-link {
+            color: var(--text-muted);
+            font-size: 28px;
+            transition: color 0.2s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 480px) {
+            .about-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .info-section {
+                align-items: center;
+            }
+            .info-section h2 {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Status Bar -->
+        <div class="card header-card">
+            <div class="icon-box">
+                <i class="ph ph-moon-stars"></i>
+            </div>
+            <div class="status-box">
+                "별이 떨어지는 밤에 너를 생각해" ✦
+            </div>
+        </div>
+        
+        <!-- About Section -->
+        <div class="card about-card">
+            <div class="profile-section">
+                <!-- Gunakan path absolut ./pfp.jpg"./pfp.jpg" alt="Anon Profile" class="profile-pic">
+                <div class="name-badge">𝑱𝒆𝒑𝒑𝒑 <span>─── ☽ .˚ ✧</span></div>
+            </div>
+            
+            <div class="info-section">
+                <h2><i class="ph ph-sparkle"></i> about me</h2>
+                
+                <div class="info-row">
+                    <strong>INFO</strong> jeppp, legal, he/him, developer
+                </div>
+                <div class="info-row">
+                    <strong>LIKES</strong> Lana (AR_LanaJKT48), late night coding, iced coffee, 2-shots
+                </div>
+                <div class="info-row">
+                    <strong>DISLIKES</strong> unnecessary drama, crowds, bugs
+                </div>
+            </div>
+        </div>
+
+        <!-- BYF / DNI Section -->
+        <div class="card rules-card">
+            <div class="rules-content">
+                <div class="rules-block">
+                    <h3><i class="ph ph-chat-centered-text"></i> before you follow (byf)</h3>
+                    <p>this is my safe space. mostly rambling about Lana, JKT48 stuff, random tech rants, and casual banter with friends. expect a mix of soft aesthetics and chaotic timeline energy. i reply and quote casually, so let's just be friends.</p>
+                </div>
+                
+                <div class="rules-block">
+                    <h3><i class="ph ph-hand-palm"></i> do not interact (dni)</h3>
+                    <p>under 16, toxic energy, drama seekers, homophobic/racist, or if you take twitter way too seriously. please keep the timeline peaceful.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Card -->
+        <div class="card social-card">
+            <a href="https://www.tiktok.com/@inisijeppp" target="_blank" class="social-link" title="TikTok">
+                <i class="ph ph-tiktok-logo"></i>
+            </a>
+            <a href="https://www.instagram.com/emzyjeppp/" target="_blank" class="social-link" title="Instagram">
+                <i class="ph ph-instagram-logo"></i>
+            </a>
+            <a href="https://twitter.com/akujeppp" target="_blank" class="social-link" title="X / Twitter">
+                <i class="ph ph-twitter-logo"></i>
+            </a>
+            <a href="https://www.facebook.com/EmjixD" target="_blank" class="social-link" title="Facebook">
+                <i class="ph ph-facebook-logo"></i>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
+
