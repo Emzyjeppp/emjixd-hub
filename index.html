@@ -16,14 +16,19 @@
 
     <style>
         :root {
-            /* Tema Gelap ala Portofolio Jeppp */
-            --bg-color: #0f172a;       /* Slate 900 */
-            --card-bg: #1e293b;        /* Slate 800 */
-            --accent: #6366f1;         /* Indigo 500 */
-            --accent-glow: rgba(99, 102, 241, 0.2);
-            --text-main: #f8fafc;      /* Slate 50 */
-            --text-muted: #94a3b8;     /* Slate 400 */
-            --border-color: #334155;   /* Slate 700 */
+            /* Vercel / Next.js High Contrast Aesthetic */
+            --bg-color: #000000;
+            --card-bg: #0a0a0a;
+            --border-color: #222222;
+            --border-hover: #444444;
+            --text-main: #ededed;
+            --text-muted: #888888;
+            
+            /* JKT48 Palette */
+            --jkt-red: #E20514;
+            --jkt-blue: #005B77;
+            --jkt-pink: #D82368;
+            --jkt-yellow: #FFFCAF;
         }
 
         * {
@@ -41,10 +46,9 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
+            /* Vercel-style subtle dot grid instead of lines */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
         .container {
@@ -57,16 +61,14 @@
 
         .card {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 8px; /* Sharper Vercel style */
+            padding: 24px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: border-color 0.15s ease, background-color 0.15s ease;
         }
 
         .card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 10px 25px -5px var(--accent-glow);
+            border-color: var(--border-hover);
         }
 
         /* --- HEADER CARD --- */
@@ -313,8 +315,8 @@
         </div>
         
         <!-- JKT48 WRAPPED BUTTON -->
-        <a href="./jkt48wrapped/index.html" class="card wrapped-btn-card" style="display: flex; align-items: center; text-decoration: none; padding: 20px; background: linear-gradient(135deg, rgba(226, 5, 20, 0.15), rgba(30, 41, 59, 0.8)); border: 1px solid rgba(226, 5, 20, 0.3); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
-            <div class="icon-box" style="background: rgba(226, 5, 20, 0.2); color: #e20514; width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; border-radius: 12px; font-size: 24px;">
+        <a href="./jkt48wrapped/index.html" class="card wrapped-btn-card" style="display: flex; align-items: center; text-decoration: none; padding: 20px; background: linear-gradient(135deg, rgba(226, 5, 20, 0.15), rgba(10, 10, 10, 1)); border: 1px solid rgba(226, 5, 20, 0.3); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
+            <div class="icon-box" style="background: rgba(226, 5, 20, 0.2); color: #e20514; width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; border-radius: 8px; font-size: 24px;">
                 <i class="ph ph-ticket"></i>
             </div>
             <div style="flex-grow: 1; margin-left: 20px; padding-right: 15px;">
@@ -354,7 +356,7 @@
                 <div class="rules-block">
                     <h3><i class="ph ph-chat-centered-text"></i> before you follow (byf)</h3>
                     <p>this is my safe space. mostly rambling about Lana, JKT48 stuff, random tech rants, and casual banter with friends. expect a mix of soft aesthetics and chaotic timeline energy. i reply and quote casually, so let's just be friends.</p>
-                    <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana JKT48" style="width: 100%; border-radius: 12px; margin-top: 12px; object-fit: cover;">
+                    <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana JKT48" style="width: 100%; border-radius: 8px; margin-top: 12px; object-fit: cover;">
                 </div>
                 
                 <div class="rules-block">
@@ -367,7 +369,7 @@
         <!-- Discord Status Card -->
         <div class="card discord-card" style="padding: 0; display: flex; overflow: hidden; justify-content: center; background-color: var(--card-bg);">
             <a href="https://discord.com/users/380345873139367936" target="_blank" style="width: 100%; display: flex; justify-content: center;">
-                <img src="https://lanyard.cnrad.dev/api/380345873139367936?theme=dark&bg=1e293b&animated=true&hideDiscrim=true&borderRadius=16px" alt="Discord Status" style="width: 100%; max-width: 500px; height: auto; object-fit: contain;">
+                <img src="https://lanyard.cnrad.dev/api/380345873139367936?theme=dark&bg=0a0a0a&animated=true&hideDiscrim=true&borderRadius=8px" alt="Discord Status" style="width: 100%; max-width: 500px; height: auto; object-fit: contain;">
             </a>
         </div>
 
