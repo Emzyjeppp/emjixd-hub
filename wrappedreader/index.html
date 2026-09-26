@@ -75,26 +75,26 @@
         }
         /* Podium CSS */
         .podium-container {
-            display: flex; justify-content: center; align-items: flex-end; gap: 15px; margin: 70px 0 40px; min-height: 280px;
+            display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin: 80px 0 50px; min-height: 350px;
         }
         .podium-item {
-            display: flex; flex-direction: column; align-items: center; width: 32%; max-width: 170px; text-align: center;
+            display: flex; flex-direction: column; align-items: center; width: 33%; max-width: 220px; text-align: center;
         }
-        .podium-name { font-weight: bold; font-size: 0.95rem; color: #fff; margin-bottom: 5px; line-height: 1.2; word-wrap: break-word; }
-        .podium-score { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; }
+        .podium-name { font-weight: bold; font-size: 1.15rem; color: #fff; margin-bottom: 5px; line-height: 1.2; word-wrap: break-word; }
+        .podium-score { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2rem; }
         .podium-bar {
-            width: 100%; border-radius: 12px 12px 0 0; margin-top: 10px; border: 1px solid rgba(226,5,20,0.3); border-bottom: none; box-shadow: 0 -10px 20px rgba(0,0,0,0.2);
+            width: 100%; border-radius: 16px 16px 0 0; margin-top: 15px; border: 1px solid rgba(226,5,20,0.3); border-bottom: none; box-shadow: 0 -10px 20px rgba(0,0,0,0.2);
         }
-        .rank-1 .podium-bar { height: 120px; background: linear-gradient(180deg, rgba(255,252,175,0.3) 0%, rgba(255,252,175,0.02) 100%); border-color: rgba(255,252,175,0.4); }
-        .rank-2 .podium-bar { height: 80px; background: linear-gradient(180deg, rgba(148,163,184,0.3) 0%, rgba(148,163,184,0.02) 100%); border-color: rgba(148,163,184,0.4); }
-        .rank-3 .podium-bar { height: 50px; background: linear-gradient(180deg, rgba(216,35,104,0.3) 0%, rgba(216,35,104,0.02) 100%); border-color: rgba(216,35,104,0.4); }
+        .rank-1 .podium-bar { height: 160px; background: linear-gradient(180deg, rgba(255,252,175,0.3) 0%, rgba(255,252,175,0.02) 100%); border-color: rgba(255,252,175,0.4); }
+        .rank-2 .podium-bar { height: 110px; background: linear-gradient(180deg, rgba(148,163,184,0.3) 0%, rgba(148,163,184,0.02) 100%); border-color: rgba(148,163,184,0.4); }
+        .rank-3 .podium-bar { height: 70px; background: linear-gradient(180deg, rgba(216,35,104,0.3) 0%, rgba(216,35,104,0.02) 100%); border-color: rgba(216,35,104,0.4); }
 
-        .rank-1 .podium-score { color: #FFFCAF; font-size: 2.2rem; }
+        .rank-1 .podium-score { color: #FFFCAF; font-size: 2.8rem; }
         .rank-2 .podium-score { color: #cbd5e1; }
         .rank-3 .podium-score { color: #D82368; }
         .podium-rank {
-            width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 900; font-family: 'Outfit', sans-serif; margin-bottom: 12px; font-size: 1.1rem;
+            width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-weight: 900; font-family: 'Outfit', sans-serif; margin-bottom: 15px; font-size: 1.3rem;
         }
         .rank-1 .podium-rank { background: #FFFCAF; color: #0f172a; box-shadow: 0 0 15px rgba(255,252,175,0.5); }
         .rank-2 .podium-rank { background: #94a3b8; color: #0f172a; }
@@ -310,7 +310,7 @@
                     <div class="podium-item rank-${p.rank}">
                         <div class="podium-rank">#${p.rank}</div>
                         <div class="podium-name">${p.data[0]}</div>
-                        <div style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.3;">${pDetailsStr}</div>
+                        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.3;">${pDetailsStr}</div>
                         <div class="podium-score">${p.data[1].total} <span style="font-size: 0.7rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span></div>
                         <div class="podium-bar"></div>
                     </div>
