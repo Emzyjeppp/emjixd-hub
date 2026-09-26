@@ -88,7 +88,7 @@
                 <p>Click the copy button below to copy the auto-extraction code. This code will only run on your computer and never sends data anywhere else.</p>
                 <div class="code-box">
 <button class="copy-btn" onclick="copyCode()">Copy</button>
-(function downloadRekapTiket() {
+<span id="script-content">(function downloadRekapTiket() {
     let baris = document.querySelectorAll('table tbody tr');
     let list2Shot = [], listMnG = [], listVC = [];
 
@@ -111,7 +111,7 @@
     let blob = new Blob([isiTeks], { type: 'text/plain' });
     let link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'Rekap_Tiket_JKT48.txt';
     document.body.appendChild(link); link.click(); document.body.removeChild(link);
-})();
+})();</span>
 </div>
             </div>
 
@@ -170,8 +170,7 @@
 
     <script>
         function copyCode() {
-            let codeBox = document.querySelector('.code-box').innerText;
-            codeBox = codeBox.replace(/^Copy\n/, ''); // Remove the "Copy" word
+            let codeBox = document.getElementById('script-content').innerText;
             
             // Fallback for file:/// and non-HTTPS contexts
             const textArea = document.createElement("textarea");
