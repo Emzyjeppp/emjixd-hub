@@ -250,8 +250,8 @@
                 padding: 60px 40px;
             }
             .desktop-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 60px;
+                grid-template-columns: 350px 1fr;
+                gap: 40px;
                 align-items: start;
             }
             .oshi-section {
@@ -259,8 +259,23 @@
                 position: sticky;
                 top: 40px;
             }
+            .grid-right {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                align-items: start;
+            }
             .stats-section {
+                grid-column: 1 / -1;
                 padding-top: 0;
+            }
+            .members-section {
+                grid-column: 1 / 2;
+                margin-top: 0 !important;
+            }
+            .theater-section {
+                grid-column: 2 / 3;
+                margin-top: 0 !important;
             }
             .stat-grid {
                 grid-template-columns: 1fr 1fr 1fr;
@@ -397,7 +412,7 @@
                     <div class="member-row">
                         <div class="member-rank" style="color: var(--jkt-red); min-width: 25px;">#1</div>
                         <div class="member-name">
-                            ITADAKI ❤ LOVE
+                            ITADAKI â¤ LOVE
                             <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 500; margin-top: 3px;">100% Winrate</div>
                         </div>
                         <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.2rem;">1x</div>
