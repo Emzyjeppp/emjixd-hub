@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKT48 Wrapped Reader</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --jkt-red: #e20514;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f8fafc;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center;
+        }
+        .container {
+            max-width: 800px; width: 100%; padding: 40px 20px;
+        }
+        .header { text-align: center; margin-bottom: 50px; }
+        .title { font-family: 'Outfit', sans-serif; font-size: 3rem; color: #fff; margin: 0; }
+        .subtitle { color: #94a3b8; font-size: 1.1rem; }
+        
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 30px; margin-bottom: 20px;
+        }
+        .step-title {
+            font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: var(--jkt-red);
+            display: flex; align-items: center; gap: 10px; margin-top: 0;
+        }
+        .code-box {
+            background: #1e293b; padding: 15px; border-radius: 8px; font-family: monospace;
+            font-size: 0.85rem; color: #a5b4fc; overflow-x: auto; white-space: pre; border: 1px solid rgba(255,255,255,0.05);
+            position: relative; line-height: 1.5;
+        }
+        .copy-btn {
+            position: absolute; right: 10px; top: 10px; background: var(--jkt-red); color: #fff;
+            border: none; padding: 5px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(255,255,255,0.2); border-radius: 16px;
+            padding: 50px 20px; text-align: center; cursor: pointer; transition: 0.3s;
+            margin-top: 20px; display: block;
+        }
+        .upload-area:hover { border-color: var(--jkt-red); background: rgba(226,5,20,0.05); }
+        .upload-area i { font-size: 3rem; color: #94a3b8; margin-bottom: 15px; }
+        #file-input { display: none; }
+        
+        /* Results Area */
+        #results { display: none; margin-top: 40px; }
+        .result-title { font-family: 'Outfit', sans-serif; font-size: 2.5rem; text-align: center; margin-bottom: 30px;}
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .stat-box { background: var(--card-bg); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-num { font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 900; }
+        .stat-label { font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .member-list { margin-top: 30px; }
+        .member-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        @media (max-width: 600px) {
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">JKT48 Wrapped Reader</h1>
+            <p class="subtitle">Securely extract and view your JKT48 ticket stats directly in your browser.</p>
+        </div>
+
+        <div id="setup-section">
+            <div class="step-card">
+                <h2 class="step-title"><i class="ph ph-number-circle-one"></i> Step 1: Copy the Script</h2>
+                <p>Click the copy button below to copy the auto-extraction code. This code will only run on your computer and never sends data anywhere else.</p>
+                <div class="code-box">
+<button class="copy-btn" onclick="copyCode()">Copy</button>
+(function downloadRekapTiket() {
+    let baris = document.querySelectorAll('table tbody tr');
+    let list2Shot = [], listMnG = [], listVC = [];
+
+    baris.forEach(tr => {
+        let sel = tr.querySelectorAll('td');
+        if (sel.length < 4) return;
+        let teksLengkap = Array.from(sel).map(td => td.innerText.trim()).join(" | ");
+        let nameLower = teksLengkap.toLowerCase();
+
+        if (nameLower.includes(', 2shot') || nameLower.includes('2shot -') || nameLower.includes('& 2-shot') || nameLower.includes('2shot,')) list2Shot.push(teksLengkap);
+        else if (nameLower.includes(', mng') || nameLower.includes('meet & greet -') || nameLower.includes('personal meet') || nameLower.includes('mng -')) listMnG.push(teksLengkap);
+        else listVC.push(teksLengkap);
+    });
+
+    let isiTeks = `=== REKAP TIKET EXCLUSIVE JKT48 ===\nTotal Tiket: ${baris.length}\n\n`;
+    isiTeks += `=== 📸 DAFTAR 2-SHOT (${list2Shot.length} tiket) ===\n` + list2Shot.map((t,i)=>`${i+1}. ${t}`).join('\n') + '\n\n';
+    isiTeks += `=== 🤝 DAFTAR MEET & GREET (${listMnG.length} tiket) ===\n` + listMnG.map((t,i)=>`${i+1}. ${t}`).join('\n') + '\n\n';
+    isiTeks += `=== 📱 DAFTAR VIDEO CALL / LAINNYA (${listVC.length} tiket) ===\n` + listVC.map((t,i)=>`${i+1}. ${t}`).join('\n');
+
+    let blob = new Blob([isiTeks], { type: 'text/plain' });
+    let link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'Rekap_Tiket_JKT48.txt';
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+})();
+</div>
+            </div>
+
+            <div class="step-card">
+                <h2 class="step-title"><i class="ph ph-number-circle-two"></i> Step 2: Download Your Data</h2>
+                <p>1. Login to <a href="https://jkt48.com/mypage" target="_blank" style="color: var(--jkt-red); font-weight: bold;">jkt48.com/mypage</a></p>
+                <p>2. Click the <strong>"Tiket Exclusive (Video Call / Two Shot)"</strong> button to open the popup table.</p>
+                <p>3. Press <strong>F12</strong> on your keyboard, then click the <strong>Console</strong> tab.</p>
+                <p>4. Paste the script you copied and hit <strong>Enter</strong>. A <code>.txt</code> file will automatically download.</p>
+            </div>
+
+            <div class="step-card">
+                <h2 class="step-title"><i class="ph ph-number-circle-three"></i> Step 3: Attach File to View</h2>
+                <label class="upload-area" id="drop-zone">
+                    <i class="ph ph-upload-simple"></i>
+                    <div style="font-weight: bold; font-size: 1.2rem;">Click to attach or drag and drop</div>
+                    <div style="color: #94a3b8; margin-top: 5px;">Upload Rekap_Tiket_JKT48.txt</div>
+                    <input type="file" id="file-input" accept=".txt">
+                </label>
+            </div>
+        </div>
+
+        <div id="results">
+            <h1 class="result-title">YOUR TICKETS</h1>
+            <div class="stat-grid">
+                <div class="stat-box" style="color: #d82368;">
+                    <div class="stat-num" id="r-2shot">0</div>
+                    <div class="stat-label">2-Shots</div>
+                </div>
+                <div class="stat-box" style="color: #e20514;">
+                    <div class="stat-num" id="r-mng">0</div>
+                    <div class="stat-label">Meet & Greet</div>
+                </div>
+                <div class="stat-box" style="color: #005b77;">
+                    <div class="stat-num" id="r-vc">0</div>
+                    <div class="stat-label">Video Calls</div>
+                </div>
+            </div>
+            
+            <div class="step-card" style="margin-top: 30px;">
+                <h2 style="font-family: 'Outfit'; color: var(--jkt-red); margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <i class="ph ph-crown"></i> Top Members Visited
+                </h2>
+                <div id="member-list" class="member-list"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="location.reload()" style="background: var(--jkt-red); color: #fff; padding: 12px 24px; border-radius: 30px; border: none; cursor: pointer; font-weight: bold;">Check Another Account</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyCode() {
+            let codeBox = document.querySelector('.code-box').innerText;
+            codeBox = codeBox.replace(/^Copy\n/, ''); // Remove the "Copy" word
+            navigator.clipboard.writeText(codeBox).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = 'Copy', 2000);
+            });
+        }
+
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                parseTxt(e.target.result);
+            };
+            reader.readAsText(file);
+        });
+
+        function parseTxt(text) {
+            let total2Shot = 0, totalMng = 0, totalVC = 0;
+            let memberCounts = {};
+
+            let lines = text.split('\n');
+            let currentMode = ""; 
+            
+            for (let line of lines) {
+                // Determine section
+                if (line.includes('📸 DAFTAR 2-SHOT')) currentMode = "2shot";
+                else if (line.includes('🤝 DAFTAR MEET & GREET')) currentMode = "mng";
+                else if (line.includes('📱 DAFTAR VIDEO CALL')) currentMode = "vc";
+                
+                // Matches lines like "1. 119842 | 19 May 2024 | ... | Aurhel Alana | 2"
+                let match = line.match(/^\d+\.\s+(.*)$/);
+                if (match) {
+                    let parts = match[1].split(' | ');
+                    let qty = 1;
+                    let memberName = "Unknown Member";
+                    
+                    let lastItem = parts[parts.length - 1];
+                    if (!isNaN(parseInt(lastItem))) qty = parseInt(lastItem);
+                    
+                    if (parts.length >= 4) {
+                        memberName = parts[parts.length - 2];
+                        if (!isNaN(parseInt(memberName))) {
+                           memberName = parts[parts.length - 3] || "Unknown Member";
+                        }
+                    }
+                    
+                    if (currentMode === "2shot") total2Shot += qty;
+                    else if (currentMode === "mng") totalMng += qty;
+                    else if (currentMode === "vc") totalVC += qty;
+                    
+                    memberCounts[memberName] = (memberCounts[memberName] || 0) + qty;
+                }
+            }
+
+            // Show results
+            document.getElementById('setup-section').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            
+            document.getElementById('r-2shot').innerText = total2Shot;
+            document.getElementById('r-mng').innerText = totalMng;
+            document.getElementById('r-vc').innerText = totalVC;
+            
+            let sortedMembers = Object.entries(memberCounts).sort((a,b) => b[1] - a[1]);
+            let listHtml = "";
+            sortedMembers.forEach((m, idx) => {
+                listHtml += `
+                    <div class="member-row">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="font-family: 'Outfit'; color: var(--jkt-red); font-weight: 900; font-size: 1.2rem; min-width: 30px;">#${idx+1}</div>
+                            <div style="font-weight: bold; font-size: 1.1rem; color: #fff;">${m[0]}</div>
+                        </div>
+                        <div style="font-family: 'Outfit'; font-size: 1.5rem; font-weight: 900; color: #fff;">
+                            ${m[1]} <span style="font-size: 0.8rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('member-list').innerHTML = listHtml || "<div style='text-align:center; padding: 20px;'>No member data found in the txt file!</div>";
+        }
+    </script>
+</body>
+</html>
