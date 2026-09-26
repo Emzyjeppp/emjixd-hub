@@ -165,11 +165,23 @@
         function copyCode() {
             let codeBox = document.querySelector('.code-box').innerText;
             codeBox = codeBox.replace(/^Copy\n/, ''); // Remove the "Copy" word
-            navigator.clipboard.writeText(codeBox).then(() => {
+            
+            // Fallback for file:/// and non-HTTPS contexts
+            const textArea = document.createElement("textarea");
+            textArea.value = codeBox;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
                 const btn = document.querySelector('.copy-btn');
                 btn.innerText = 'Copied!';
                 setTimeout(() => btn.innerText = 'Copy', 2000);
-            });
+            } catch (err) {
+                alert("Failed to copy! Please select the text manually.");
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         document.getElementById('file-input').addEventListener('change', function(e) {
