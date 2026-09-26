@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKT48 Wrapped | Jeppp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            /* Palette dari JKT48 Official Website */
+            --jkt-red: #E20514;
+            --jkt-pink: #ED2672;
+            --jkt-pink-dark: #D82368;
+            --jkt-pink-light: #FDE9F1;
+            --jkt-pink-accent: #FF4081;
+            --jkt-bg-dark: #020817; 
+            --jkt-blue: #005B77;
+            --jkt-yellow: #FFFCAF;
+            --jkt-green: #D5F1BA;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--jkt-bg-dark);
+            color: var(--text-light);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Container untuk Scroll Snap Vertikal (mirip TikTok/Shorts) */
+        .wrapper {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Sembunyikan scrollbar untuk kesan App */
+        .wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .wrapper {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Background Colors per Slide */
+        .slide-1 {
+            background: linear-gradient(135deg, var(--jkt-bg-dark), var(--jkt-blue));
+        }
+        
+        .slide-2 {
+            background: linear-gradient(135deg, var(--jkt-red), var(--jkt-pink-dark));
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, var(--jkt-pink-light), #FFFFFF);
+            color: var(--jkt-bg-dark);
+        }
+
+        .slide-4 {
+            background: linear-gradient(135deg, var(--jkt-bg-dark), #111);
+        }
+
+        /* Typography & Layout */
+        .title-huge {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .highlight-box {
+            background-color: var(--jkt-yellow);
+            color: var(--jkt-bg-dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 20px;
+            transform: rotate(-3deg);
+        }
+
+        .image-card {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 5px solid var(--jkt-yellow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin: 30px 0;
+            transform: rotate(2deg);
+            transition: transform 0.3s;
+        }
+
+        .image-card:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: var(--jkt-red);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(226, 5, 20, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .stat-box.blue {
+            background: var(--jkt-blue);
+            box-shadow: 0 10px 20px rgba(0, 91, 119, 0.2);
+        }
+
+        .stat-num {
+            font-size: 2.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Scroll Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <!-- Slide 1: Intro -->
+        <section class="slide slide-1">
+            <div class="highlight-box">MY PAGE STATS</div>
+            <h1 class="title-huge">JKT48<br>WRAPPED</h1>
+            <p class="subtitle">A look back at my theater & fandom journey.</p>
+            <i class="ph ph-caret-double-down scroll-down"></i>
+        </section>
+
+        <!-- Slide 2: Top Oshi -->
+        <section class="slide slide-2">
+            <p class="subtitle">You spent the most time supporting...</p>
+            <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana" class="image-card">
+            <h1 class="title-huge" style="font-size: 3rem;">LANA</h1>
+            <div class="highlight-box" style="background: var(--jkt-green); color: var(--jkt-bg-dark); transform: rotate(2deg);">Aurhel Alana</div>
+            <i class="ph ph-caret-double-down scroll-down"></i>
+        </section>
+
+        <!-- Slide 3: Stats (Theater & 2-Shot) -->
+        <section class="slide slide-3">
+            <h1 class="title-huge" style="font-size: 2.5rem; color: var(--jkt-pink-dark);">THE DAMAGE</h1>
+            <p class="subtitle" style="color: var(--jkt-bg-dark);">Points well spent this year.</p>
+            
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <i class="ph ph-ticket" style="font-size: 2rem;"></i>
+                    <div class="stat-num">?</div>
+                    <div class="stat-label">Theater Shows</div>
+                </div>
+                <div class="stat-box blue">
+                    <i class="ph ph-camera" style="font-size: 2rem;"></i>
+                    <div class="stat-num">?</div>
+                    <div class="stat-label">2-Shots</div>
+                </div>
+            </div>
+            <i class="ph ph-caret-double-down scroll-down" style="color: var(--jkt-bg-dark);"></i>
+        </section>
+
+        <!-- Slide 4: Outro -->
+        <section class="slide slide-4">
+            <h1 class="title-huge" style="font-size: 3rem; color: var(--jkt-yellow);">SEE YOU<br>NEXT YEAR</h1>
+            <p class="subtitle">Still here, still loud.</p>
+            <a href="/" style="display: inline-block; margin-top: 30px; padding: 15px 30px; background: var(--jkt-pink-accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-family: 'Outfit';">BACK TO BIO</a>
+        </section>
+
+    </div>
+
+</body>
+</html>
