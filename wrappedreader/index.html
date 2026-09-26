@@ -206,18 +206,17 @@
                     let lastItem = parts[parts.length - 1];
                     if (!isNaN(parseInt(lastItem))) qty = parseInt(lastItem);
                     
-                    if (parts.length >= 4) {
-                        // The format is usually [..., "Event", "Member Name", "Session X", "Qty"]
-                        // So the member name is at length - 3
-                        let possibleSession = parts[parts.length - 2].toLowerCase();
+                    // Rock-solid backward scan to find the actual Member Name
+                    for (let i = parts.length - 2; i >= 0; i--) {
+                        let val = parts[i].toLowerCase();
+                        // Skip if it is a Session column
+                        if (val.includes('sesi') || val.includes('session')) continue;
+                        // Skip if it is a Lane/Track column
+                        if (val.includes('lane') || val.includes('jalur') || val.includes('track') || val.includes('line')) continue;
                         
-                        if (possibleSession.includes('sesi') || possibleSession.includes('session') || possibleSession.includes('jalur') || possibleSession.includes('track') || possibleSession.includes('line')) {
-                            memberName = parts[parts.length - 3] || parts[parts.length - 2];
-                        } else {
-                            // If it doesn't look like a session, just assume it's length - 3 anyway, 
-                            // or fallback to length - 2 if length - 3 is somehow missing
-                            memberName = parts[parts.length - 3] || parts[parts.length - 2];
-                        }
+                        // We found the Member Name!
+                        memberName = parts[i];
+                        break;
                     }
                     
                     if (currentMode === "2shot") total2Shot += qty;
