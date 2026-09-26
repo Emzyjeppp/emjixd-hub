@@ -10,7 +10,6 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
-            /* Palette dari JKT48 Official Website */
             --jkt-red: #E20514;
             --jkt-pink: #ED2672;
             --jkt-pink-dark: #D82368;
@@ -34,75 +33,42 @@
             color: var(--text-light);
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Container untuk Scroll Snap Vertikal (mirip TikTok/Shorts) */
-        .wrapper {
-            height: 100vh;
-            width: 100vw;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        /* Sembunyikan scrollbar untuk kesan App */
-        .wrapper::-webkit-scrollbar {
-            display: none;
-        }
-        .wrapper {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .slide {
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            text-align: center;
+        /* Container for Single Page */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         h1, h2, h3 {
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Background Colors per Slide */
-        .slide-1 {
-            background: linear-gradient(135deg, var(--jkt-bg-dark), var(--jkt-blue));
-        }
-        
-        .slide-2 {
-            background: linear-gradient(135deg, var(--jkt-red), var(--jkt-pink-dark));
+        .header-section {
+            text-align: center;
+            padding: 40px 0 60px;
+            border-bottom: 2px dashed rgba(255,255,255,0.1);
         }
 
-        .slide-3 {
-            background: linear-gradient(135deg, var(--jkt-pink-light), #FFFFFF);
-            color: var(--jkt-bg-dark);
-        }
-
-        .slide-4 {
-            background: linear-gradient(135deg, var(--jkt-bg-dark), #111);
-        }
-
-        /* Typography & Layout */
         .title-huge {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 900;
             line-height: 1.1;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, var(--jkt-red), var(--jkt-pink-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            opacity: 0.9;
+            color: #94a3b8;
         }
 
         .highlight-box {
@@ -114,125 +80,237 @@
             display: inline-block;
             margin-bottom: 20px;
             transform: rotate(-3deg);
+            font-family: 'Outfit', sans-serif;
         }
 
-        .image-card {
-            width: 250px;
-            height: 250px;
-            border-radius: 20px;
+        /* Oshi Section */
+        .oshi-section {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .oshi-image-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 30px;
+        }
+
+        .oshi-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
             object-fit: cover;
-            border: 5px solid var(--jkt-yellow);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            margin: 30px 0;
+            border: 6px solid var(--jkt-yellow);
+            box-shadow: 0 20px 40px rgba(226, 5, 20, 0.3);
             transform: rotate(2deg);
             transition: transform 0.3s;
         }
 
-        .image-card:hover {
-            transform: rotate(0deg) scale(1.05);
+        .oshi-image:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .oshi-badge {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            background: var(--jkt-red);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transform: rotate(-5deg);
+            border: 4px solid var(--jkt-bg-dark);
+        }
+
+        .oshi-name {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        /* Stats Grid */
+        .stats-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--jkt-pink-light);
         }
 
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 30px;
         }
 
         .stat-box {
             background: var(--jkt-red);
             color: white;
-            padding: 20px;
-            border-radius: 16px;
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
             box-shadow: 0 10px 20px rgba(226, 5, 20, 0.2);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            align-items: center;
         }
 
-        .stat-box.blue {
-            background: var(--jkt-blue);
-            box-shadow: 0 10px 20px rgba(0, 91, 119, 0.2);
-        }
+        .stat-box.pink { background: var(--jkt-pink-dark); box-shadow: 0 10px 20px rgba(216, 35, 104, 0.2); }
+        .stat-box.blue { background: var(--jkt-blue); box-shadow: 0 10px 20px rgba(0, 91, 119, 0.2); grid-column: 1 / -1; }
 
         .stat-num {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
+            line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
         }
 
-        /* Scroll Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            animation: bounce 2s infinite;
-            opacity: 0.7;
-            font-size: 2rem;
+        /* Top Members List */
+        .members-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
+        .member-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .member-row:last-child {
+            border-bottom: none;
         }
 
+        .member-rank {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            color: var(--jkt-pink);
+            font-size: 1.2rem;
+            width: 30px;
+        }
+
+        .member-name {
+            flex-grow: 1;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin: 60px auto 20px;
+            padding: 15px 30px;
+            background: var(--text-light);
+            color: var(--jkt-bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            transition: transform 0.2s;
+            width: fit-content;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
+    <div class="container">
         
-        <!-- Slide 1: Intro -->
-        <section class="slide slide-1">
+        <!-- Header -->
+        <header class="header-section">
             <div class="highlight-box">MY PAGE STATS</div>
-            <h1 class="title-huge">JKT48<br>WRAPPED</h1>
-            <p class="subtitle">A look back at my theater & fandom journey.</p>
-            <i class="ph ph-caret-double-down scroll-down"></i>
+            <h1 class="title-huge">JKT48 WRAPPED</h1>
+            <p class="subtitle">A look back at my theater & fandom journey from 2024 to 2026.</p>
+        </header>
+
+        <!-- Top Oshi -->
+        <section class="oshi-section">
+            <h2 class="section-title" style="font-size: 1.2rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Your Undisputed Queen</h2>
+            <div class="oshi-image-wrapper">
+                <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana" class="oshi-image">
+                <div class="oshi-badge">#1 OSHI</div>
+            </div>
+            <h1 class="oshi-name">AURHEL ALANA</h1>
+            <p class="subtitle" style="color: var(--jkt-pink-light);">You spent ~80% of your tickets supporting Lana.</p>
         </section>
 
-        <!-- Slide 2: Top Oshi -->
-        <section class="slide slide-2">
-            <p class="subtitle">You spent the most time supporting...</p>
-            <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana" class="image-card">
-            <h1 class="title-huge" style="font-size: 3rem;">LANA</h1>
-            <div class="highlight-box" style="background: var(--jkt-green); color: var(--jkt-bg-dark); transform: rotate(2deg);">Aurhel Alana</div>
-            <i class="ph ph-caret-double-down scroll-down"></i>
-        </section>
-
-        <!-- Slide 3: Stats (Theater & 2-Shot) -->
-        <section class="slide slide-3">
-            <h1 class="title-huge" style="font-size: 2.5rem; color: var(--jkt-pink-dark);">THE DAMAGE</h1>
-            <p class="subtitle" style="color: var(--jkt-bg-dark);">Points well spent this year.</p>
+        <!-- The Damage (Stats) -->
+        <section class="stats-section">
+            <h2 class="section-title">THE DAMAGE</h2>
+            <p class="subtitle" style="text-align: center; margin-bottom: 30px;">Points well spent over 102 transactions.</p>
             
             <div class="stat-grid">
-                <div class="stat-box">
-                    <i class="ph ph-camera" style="font-size: 2rem;"></i>
-                    <div class="stat-num">11</div>
+                <div class="stat-box pink">
+                    <i class="ph ph-camera" style="font-size: 2.5rem;"></i>
+                    <div class="stat-num">17</div>
                     <div class="stat-label">2-Shots</div>
                 </div>
+                <div class="stat-box">
+                    <i class="ph ph-handshake" style="font-size: 2.5rem;"></i>
+                    <div class="stat-num">50</div>
+                    <div class="stat-label">Meet & Greet</div>
+                </div>
                 <div class="stat-box blue">
-                    <i class="ph ph-phone-call" style="font-size: 2rem;"></i>
-                    <div class="stat-num">91</div>
+                    <i class="ph ph-video-camera" style="font-size: 2.5rem;"></i>
+                    <div class="stat-num">65+</div>
                     <div class="stat-label">Video Calls</div>
                 </div>
             </div>
-            <i class="ph ph-caret-double-down scroll-down" style="color: var(--jkt-bg-dark);"></i>
         </section>
 
-        <!-- Slide 4: Outro -->
-        <section class="slide slide-4">
-            <h1 class="title-huge" style="font-size: 3rem; color: var(--jkt-yellow);">SEE YOU<br>NEXT YEAR</h1>
-            <p class="subtitle">Still here, still loud.</p>
-            <a href="/" style="display: inline-block; margin-top: 30px; padding: 15px 30px; background: var(--jkt-pink-accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-family: 'Outfit';">BACK TO BIO</a>
+        <!-- Other Members Visited -->
+        <section class="members-section">
+            <h2 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 20px;">Other Members Visited</h2>
+            
+            <div class="member-row">
+                <div class="member-rank">#2</div>
+                <div class="member-name">Catherina Vallencia</div>
+            </div>
+            <div class="member-row">
+                <div class="member-rank">#3</div>
+                <div class="member-name">Flora Shafiq</div>
+            </div>
+            <div class="member-row">
+                <div class="member-rank">#4</div>
+                <div class="member-name">Astrella Virgiananda</div>
+            </div>
+            <div class="member-row">
+                <div class="member-rank">#5</div>
+                <div class="member-name">Kathrina Irene</div>
+            </div>
+            <div class="member-row" style="opacity: 0.7; font-size: 0.9rem;">
+                <div class="member-name" style="font-weight: 500;">Also visited: Grace Octaviani, Gabriela Abigail, Jesslyn Elly, Michelle Levia, Letycia Moreen, Abigail Rachel.</div>
+            </div>
         </section>
+
+        <a href="/" class="back-btn">BACK TO BIO</a>
 
     </div>
 
