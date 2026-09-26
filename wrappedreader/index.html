@@ -8,14 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #020817; 
+            /* Vercel High Contrast Aesthetic */
+            --bg-main: #000000; 
+            --card-bg: #0a0a0a;
+            --border-color: #222222;
+            --text-main: #ededed;
+            --text-muted: #888888;
+            
             --jkt-red: #E20514;
             --jkt-pink: #ED2672;
             --jkt-pink-dark: #D82368;
             --jkt-blue: #005B77;
             --jkt-yellow: #FFFCAF;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --text-main: #f8fafc;
         }
         body {
             background-color: var(--bg-main);
@@ -23,49 +27,53 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             display: flex; justify-content: center;
+            /* Vercel-style subtle dot grid */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
         .container {
             max-width: 800px; width: 100%; padding: 40px 20px;
         }
         .header { text-align: center; margin-bottom: 50px; }
         .title { font-family: 'Outfit', sans-serif; font-size: 3rem; color: #fff; margin: 0; }
-        .subtitle { color: #94a3b8; font-size: 1.1rem; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
         
         .step-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px; padding: 30px; margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 30px; margin-bottom: 20px;
         }
         .step-title {
             font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: var(--jkt-red);
             display: flex; align-items: center; gap: 10px; margin-top: 0;
         }
         .code-box {
-            background: #1e293b; padding: 15px; border-radius: 8px; font-family: monospace;
-            font-size: 0.85rem; color: #a5b4fc; overflow-x: auto; white-space: pre; border: 1px solid rgba(255,255,255,0.05);
+            background: #111111; padding: 15px; border-radius: 6px; font-family: monospace;
+            font-size: 0.85rem; color: #a5b4fc; overflow-x: auto; white-space: pre; border: 1px solid var(--border-color);
             position: relative; line-height: 1.5;
         }
         .copy-btn {
-            position: absolute; right: 10px; top: 10px; background: var(--jkt-red); color: #fff;
-            border: none; padding: 5px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;
+            position: absolute; right: 10px; top: 10px; background: #222222; color: #fff;
+            border: 1px solid #444; padding: 5px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;
         }
+        .copy-btn:hover { background: #333333; }
         
         .upload-area {
-            border: 2px dashed rgba(255,255,255,0.2); border-radius: 16px;
+            border: 2px dashed var(--border-color); border-radius: 8px;
             padding: 50px 20px; text-align: center; cursor: pointer; transition: 0.3s;
-            margin-top: 20px; display: block;
+            margin-top: 20px; display: block; background: rgba(255,255,255,0.01);
         }
         .upload-area:hover { border-color: var(--jkt-red); background: rgba(226,5,20,0.05); }
-        .upload-area i { font-size: 3rem; color: #94a3b8; margin-bottom: 15px; }
+        .upload-area i { font-size: 3rem; color: var(--text-muted); margin-bottom: 15px; }
         #file-input { display: none; }
         
         /* Results Area */
         #results { display: none; margin-top: 40px; }
         .result-title { font-family: 'Outfit', sans-serif; font-size: 2.5rem; text-align: center; margin-bottom: 30px;}
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .stat-box { background: var(--card-bg); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-box { background: var(--card-bg); padding: 20px; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); }
         .stat-num { font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 900; }
-        .stat-label { font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         
         .member-list { margin-top: 30px; }
         .member-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
