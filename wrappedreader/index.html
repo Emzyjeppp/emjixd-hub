@@ -223,7 +223,13 @@
                     else if (currentMode === "mng") totalMng += qty;
                     else if (currentMode === "vc") totalVC += qty;
                     
-                    memberCounts[memberName] = (memberCounts[memberName] || 0) + qty;
+                    if (!memberCounts[memberName]) {
+                        memberCounts[memberName] = { total: 0, ts: 0, mng: 0, vc: 0 };
+                    }
+                    memberCounts[memberName].total += qty;
+                    if (currentMode === "2shot") memberCounts[memberName].ts += qty;
+                    else if (currentMode === "mng") memberCounts[memberName].mng += qty;
+                    else if (currentMode === "vc") memberCounts[memberName].vc += qty;
                 }
             }
 
@@ -235,17 +241,26 @@
             document.getElementById('r-mng').innerText = totalMng;
             document.getElementById('r-vc').innerText = totalVC;
             
-            let sortedMembers = Object.entries(memberCounts).sort((a,b) => b[1] - a[1]);
+            let sortedMembers = Object.entries(memberCounts).sort((a,b) => b[1].total - a[1].total);
             let listHtml = "";
             sortedMembers.forEach((m, idx) => {
+                let details = [];
+                if (m[1].ts > 0) details.push(m[1].ts + "x 2-Shot");
+                if (m[1].mng > 0) details.push(m[1].mng + "x Meet & Greet");
+                if (m[1].vc > 0) details.push(m[1].vc + "x Video Call");
+                let detailsStr = details.join(", ");
+                
                 listHtml += `
                     <div class="member-row">
                         <div style="display: flex; align-items: center; gap: 15px;">
                             <div style="font-family: 'Outfit'; color: var(--jkt-red); font-weight: 900; font-size: 1.2rem; min-width: 30px;">#${idx+1}</div>
-                            <div style="font-weight: bold; font-size: 1.1rem; color: #fff;">${m[0]}</div>
+                            <div>
+                                <div style="font-weight: bold; font-size: 1.1rem; color: #fff;">${m[0]}</div>
+                                <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 500; margin-top: 3px; font-family: 'Inter';">${detailsStr}</div>
+                            </div>
                         </div>
                         <div style="font-family: 'Outfit'; font-size: 1.5rem; font-weight: 900; color: #fff;">
-                            ${m[1]} <span style="font-size: 0.8rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span>
+                            ${m[1].total} <span style="font-size: 0.8rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span>
                         </div>
                     </div>
                 `;
