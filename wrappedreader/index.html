@@ -319,7 +319,8 @@
                 let pDetailsStr = pDetails.join(" • ");
                 
                 let memberImgName = p.data[0].toLowerCase().replace(/ /g, '_');
-                let imgUrl = `https://jkt48.com/api/v1/storages/media/jkt48-member/${memberImgName}.jpg`;
+                let originalImgUrl = `https://jkt48.com/api/v1/storages/media/jkt48-member/${memberImgName}.jpg`;
+                let imgUrl = `https://wsrv.nl/?url=${encodeURIComponent(originalImgUrl)}&w=150&h=150&fit=cover`;
                 
                 podiumHtml += `
                     <div class="podium-item rank-${p.rank}">
