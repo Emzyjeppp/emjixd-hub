@@ -92,11 +92,23 @@
         .rank-1 .podium-score { color: #FFFCAF; font-size: 2.8rem; }
         .rank-2 .podium-score { color: #cbd5e1; }
         .rank-3 .podium-score { color: #D82368; }
-        .podium-rank {
-            width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 900; font-family: 'Outfit', sans-serif; margin-bottom: 15px; font-size: 1.3rem;
+        
+        .podium-photo-wrapper { position: relative; width: 65px; height: 65px; margin-bottom: 15px; }
+        .rank-1 .podium-photo-wrapper { width: 85px; height: 85px; }
+        .podium-img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+            background: #1e293b; border: 3px solid;
         }
-        .rank-1 .podium-rank { background: #FFFCAF; color: #0f172a; box-shadow: 0 0 15px rgba(255,252,175,0.5); }
+        .rank-1 .podium-img { border-color: #FFFCAF; box-shadow: 0 0 15px rgba(255,252,175,0.5); }
+        .rank-2 .podium-img { border-color: #94a3b8; box-shadow: 0 0 10px rgba(148,163,184,0.4); }
+        .rank-3 .podium-img { border-color: #D82368; box-shadow: 0 0 10px rgba(216,35,104,0.4); }
+        
+        .podium-rank {
+            position: absolute; bottom: -5px; right: -5px;
+            width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-weight: 900; font-family: 'Outfit', sans-serif; font-size: 0.85rem; z-index: 2;
+        }
+        .rank-1 .podium-rank { width: 30px; height: 30px; font-size: 1rem; background: #FFFCAF; color: #0f172a; box-shadow: 0 0 10px rgba(255,252,175,0.5); }
         .rank-2 .podium-rank { background: #94a3b8; color: #0f172a; }
         .rank-3 .podium-rank { background: #D82368; color: #fff; }
     </style>
@@ -306,9 +318,16 @@
                 if (p.data[1].vc > 0) pDetails.push(p.data[1].vc + "x VC");
                 let pDetailsStr = pDetails.join(" • ");
                 
+                let memberImgName = p.data[0].toLowerCase().replace(/ /g, '_');
+                let imgUrl = `https://jkt48.com/api/v1/storages/media/jkt48-member/${memberImgName}.jpg`;
+                
                 podiumHtml += `
                     <div class="podium-item rank-${p.rank}">
-                        <div class="podium-rank">#${p.rank}</div>
+                        <div class="podium-photo-wrapper">
+                            <img src="${imgUrl}" class="podium-img" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="podium-img" style="display:none; justify-content:center; align-items:center; font-family:'Outfit'; font-size:2rem; font-weight:900; color:#fff;">${p.data[0].charAt(0)}</div>
+                            <div class="podium-rank">#${p.rank}</div>
+                        </div>
                         <div class="podium-name">${p.data[0]}</div>
                         <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.3;">${pDetailsStr}</div>
                         <div class="podium-score">${p.data[1].total} <span style="font-size: 0.7rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span></div>
