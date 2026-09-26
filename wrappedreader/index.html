@@ -207,9 +207,16 @@
                     if (!isNaN(parseInt(lastItem))) qty = parseInt(lastItem);
                     
                     if (parts.length >= 4) {
-                        memberName = parts[parts.length - 2];
-                        if (!isNaN(parseInt(memberName))) {
-                           memberName = parts[parts.length - 3] || "Unknown Member";
+                        // The format is usually [..., "Event", "Member Name", "Session X", "Qty"]
+                        // So the member name is at length - 3
+                        let possibleSession = parts[parts.length - 2].toLowerCase();
+                        
+                        if (possibleSession.includes('sesi') || possibleSession.includes('session') || possibleSession.includes('jalur') || possibleSession.includes('track') || possibleSession.includes('line')) {
+                            memberName = parts[parts.length - 3] || parts[parts.length - 2];
+                        } else {
+                            // If it doesn't look like a session, just assume it's length - 3 anyway, 
+                            // or fallback to length - 2 if length - 3 is somehow missing
+                            memberName = parts[parts.length - 3] || parts[parts.length - 2];
                         }
                     }
                     
