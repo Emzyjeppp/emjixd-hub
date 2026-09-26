@@ -300,11 +300,18 @@
             if (top3.length >= 3) podiumOrder.push({ rank: 3, data: top3[2] });
             
             podiumOrder.forEach(p => {
+                let pDetails = [];
+                if (p.data[1].ts > 0) pDetails.push(p.data[1].ts + "x 2-Shot");
+                if (p.data[1].mng > 0) pDetails.push(p.data[1].mng + "x MnG");
+                if (p.data[1].vc > 0) pDetails.push(p.data[1].vc + "x VC");
+                let pDetailsStr = pDetails.join(" • ");
+                
                 podiumHtml += `
                     <div class="podium-item rank-${p.rank}">
                         <div class="podium-rank">#${p.rank}</div>
                         <div class="podium-name">${p.data[0]}</div>
-                        <div class="podium-score">${p.data[1].total}</div>
+                        <div style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.3;">${pDetailsStr}</div>
+                        <div class="podium-score">${p.data[1].total} <span style="font-size: 0.7rem; color: #94a3b8; font-family: 'Inter';">TICKETS</span></div>
                         <div class="podium-bar"></div>
                     </div>
                 `;
