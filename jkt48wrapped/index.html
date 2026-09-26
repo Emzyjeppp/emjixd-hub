@@ -237,6 +237,38 @@
         .back-btn:hover {
             transform: scale(1.05);
         }
+        /* Desktop Grid Layout */
+        .desktop-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 900px) {
+            .container {
+                max-width: 1200px;
+                padding: 60px 40px;
+            }
+            .desktop-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: start;
+            }
+            .oshi-section {
+                padding: 0;
+                position: sticky;
+                top: 40px;
+            }
+            .stats-section {
+                padding-top: 0;
+            }
+            .stat-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .stat-box.blue {
+                grid-column: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -250,80 +282,88 @@
             <p class="subtitle">A look back at my theater & fandom journey from 2024 to 2026.</p>
         </header>
 
-        <!-- Top Oshi -->
-        <section class="oshi-section">
-            <h2 class="section-title" style="font-size: 1.2rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Your Undisputed Queen</h2>
-            <div class="oshi-image-wrapper">
-                <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana" class="oshi-image">
-                <div class="oshi-badge">#1 OSHI</div>
-            </div>
-            <h1 class="oshi-name">AURHEL ALANA</h1>
-            <p class="subtitle" style="color: var(--jkt-pink-light); margin-bottom: 20px;">You spent ~80% of your tickets supporting Lana.</p>
+        <div class="desktop-grid">
             
-            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; max-width: 350px; margin: 0 auto; display: flex; justify-content: space-around; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
-                <div>
-                    <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-pink-light);">9</div>
-                    <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">2-Shots</div>
-                </div>
-                <div>
-                    <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-red);">35</div>
-                    <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Meet & Greet</div>
-                </div>
-                <div>
-                    <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-blue);">39</div>
-                    <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Video Calls</div>
-                </div>
+            <!-- LEFT COLUMN (Desktop) -->
+            <div class="grid-left">
+                <!-- Top Oshi -->
+                <section class="oshi-section">
+                    <h2 class="section-title" style="font-size: 1.2rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Your Undisputed Queen</h2>
+                    <div class="oshi-image-wrapper">
+                        <img src="https://media1.tenor.com/m/oZqeCmocBdUAAAAd/lanajkt48-aurhel.gif" alt="Lana" class="oshi-image">
+                        <div class="oshi-badge">#1 OSHI</div>
+                    </div>
+                    <h1 class="oshi-name">AURHEL ALANA</h1>
+                    <p class="subtitle" style="color: var(--jkt-pink-light); margin-bottom: 20px;">You spent ~80% of your tickets supporting Lana.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; max-width: 350px; margin: 0 auto; display: flex; justify-content: space-around; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+                        <div>
+                            <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-pink-light);">9</div>
+                            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">2-Shots</div>
+                        </div>
+                        <div>
+                            <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-red);">35</div>
+                            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Meet & Greet</div>
+                        </div>
+                        <div>
+                            <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--jkt-blue);">39</div>
+                            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Video Calls</div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
 
-        <!-- The Damage (Stats) -->
-        <section class="stats-section">
-            <h2 class="section-title">THE DAMAGE</h2>
-            <p class="subtitle" style="text-align: center; margin-bottom: 30px;">Points well spent over 102 transactions.</p>
-            
-            <div class="stat-grid">
-                <div class="stat-box pink">
-                    <i class="ph ph-camera" style="font-size: 2.5rem;"></i>
-                    <div class="stat-num">17</div>
-                    <div class="stat-label">2-Shots</div>
-                </div>
-                <div class="stat-box">
-                    <i class="ph ph-handshake" style="font-size: 2.5rem;"></i>
-                    <div class="stat-num">50</div>
-                    <div class="stat-label">Meet & Greet</div>
-                </div>
-                <div class="stat-box blue">
-                    <i class="ph ph-video-camera" style="font-size: 2.5rem;"></i>
-                    <div class="stat-num">65+</div>
-                    <div class="stat-label">Video Calls</div>
-                </div>
-            </div>
-        </section>
+            <!-- RIGHT COLUMN (Desktop) -->
+            <div class="grid-right">
+                <!-- The Damage (Stats) -->
+                <section class="stats-section">
+                    <h2 class="section-title">THE DAMAGE</h2>
+                    <p class="subtitle" style="text-align: center; margin-bottom: 30px;">Points well spent over 102 transactions.</p>
+                    
+                    <div class="stat-grid">
+                        <div class="stat-box pink">
+                            <i class="ph ph-camera" style="font-size: 2.5rem;"></i>
+                            <div class="stat-num">17</div>
+                            <div class="stat-label">2-Shots</div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="ph ph-handshake" style="font-size: 2.5rem;"></i>
+                            <div class="stat-num">50</div>
+                            <div class="stat-label">Meet & Greet</div>
+                        </div>
+                        <div class="stat-box blue">
+                            <i class="ph ph-video-camera" style="font-size: 2.5rem;"></i>
+                            <div class="stat-num">65+</div>
+                            <div class="stat-label">Video Calls</div>
+                        </div>
+                    </div>
+                </section>
 
-        <!-- Other Members Visited -->
-        <section class="members-section">
-            <h2 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 20px;">Other Members Visited</h2>
-            
-            <div class="member-row">
-                <div class="member-rank">#2</div>
-                <div class="member-name">Catherina Vallencia</div>
+                <!-- Other Members Visited -->
+                <section class="members-section">
+                    <h2 class="section-title" style="font-size: 1.5rem; text-align: left; margin-bottom: 20px;">Other Members Visited</h2>
+                    
+                    <div class="member-row">
+                        <div class="member-rank">#2</div>
+                        <div class="member-name">Catherina Vallencia</div>
+                    </div>
+                    <div class="member-row">
+                        <div class="member-rank">#3</div>
+                        <div class="member-name">Flora Shafiq</div>
+                    </div>
+                    <div class="member-row">
+                        <div class="member-rank">#4</div>
+                        <div class="member-name">Astrella Virgiananda</div>
+                    </div>
+                    <div class="member-row">
+                        <div class="member-rank">#5</div>
+                        <div class="member-name">Kathrina Irene</div>
+                    </div>
+                    <div class="member-row" style="opacity: 0.7; font-size: 0.9rem;">
+                        <div class="member-name" style="font-weight: 500;">Also visited: Grace Octaviani, Gabriela Abigail, Jesslyn Elly, Michelle Levia, Letycia Moreen, Abigail Rachel.</div>
+                    </div>
+                </section>
             </div>
-            <div class="member-row">
-                <div class="member-rank">#3</div>
-                <div class="member-name">Flora Shafiq</div>
-            </div>
-            <div class="member-row">
-                <div class="member-rank">#4</div>
-                <div class="member-name">Astrella Virgiananda</div>
-            </div>
-            <div class="member-row">
-                <div class="member-rank">#5</div>
-                <div class="member-name">Kathrina Irene</div>
-            </div>
-            <div class="member-row" style="opacity: 0.7; font-size: 0.9rem;">
-                <div class="member-name" style="font-weight: 500;">Also visited: Grace Octaviani, Gabriela Abigail, Jesslyn Elly, Michelle Levia, Letycia Moreen, Abigail Rachel.</div>
-            </div>
-        </section>
 
         <a href="/" class="back-btn">BACK TO BIO</a>
 
